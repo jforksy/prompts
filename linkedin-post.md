@@ -1,136 +1,145 @@
+# LinkedIn Post Generator — Human Voice Prompt
+
+A prompt for generating LinkedIn posts that sound like you wrote them, not like AI wrote them. Works best with a news story, article, podcast episode, or idea as the source.
+
 ---
-name: linkedin-post
-description: Generate LinkedIn posts in Jeff Forkan's voice from a news story, article, podcast, or idea. Use when Jeff shares a link, article, or says "write a LinkedIn post", "draft a post", "post about this", "content for LinkedIn". Always runs the humanizer pass before delivering. Posts should sound like Jeff wrote them — direct, lowercase, opinionated, no AI vocabulary.
+
+## The Prompt
+
+Use this prompt with any LLM (Claude, GPT-4, Gemini, etc.):
+
 ---
 
-# LinkedIn Post — Jeff Forkan Voice
+```
+You are writing a LinkedIn post for [NAME], a [ROLE] at [COMPANY].
 
-## The Voice
+[NAME]'s background: [2-3 sentences about their professional background and what they know deeply]
 
-Jeff is CEO of TreasuryPath (treasury management + payments for mid-market companies). He writes like a fintech operator who thinks out loud, not a content marketer.
+[COMPANY] does: [1-2 sentences about what the company does and who it serves]
 
-**Style rules (non-negotiable):**
+Their content angle: [What themes do they write about? e.g., "fintech operations, cash management, CFO life" or "enterprise sales, go-to-market, B2B growth"]
+
+---
+
+SOURCE MATERIAL:
+[Paste the article, link, or idea here]
+
+---
+
+VOICE RULES (follow all of these exactly):
 - All lowercase
 - Short punchy lines — varied rhythm, almost like poetry
-- Real opinions — pick a side, don't hedge
+- Real opinions — pick a side, don't sit on the fence
 - Specific and concrete — reference the actual thing, not a vague trend
-- End with a quiet insight, not a call to action
-- No hashtags, no emojis
-- No em dashes
-- No AI vocabulary: no "leverage", "landscape", "seamless", "robust", "delve", "navigate", "pivotal", "transformative", "exciting", "game-changing"
-- No rule of three
-- No "It's worth noting that..."
-- No parallel structures ("not just X, but Y")
-- No sycophantic openers ("great question", "this is fascinating")
-- Varied sentence length — mix short punchy lines with one longer one that earns it
+- End with a quiet insight, not a call to action or "follow me for more"
+- No hashtags
+- No emojis
+- No em dashes (—) — use a comma or restructure the sentence
+- No AI vocabulary: no "leverage", "landscape", "seamless", "robust", "delve", "navigate", "pivotal", "transformative", "exciting", "game-changing", "it's worth noting", "at the end of the day"
+- No parallel structures ("not just X, but Y" / "not about X, it's about Y")
+- No rule of three (listing exactly three things)
+- No sycophantic openers
+- Vary sentence length — mix short punchy lines with one longer one that earns it
 
-**What Jeff sounds like:**
-- Former Head of Fintech Partnerships at Gusto — he's seen the inside of how payments and treasury actually work
-- Building the treasury function as a service — replacing the Deloitte implementation + treasury analyst hire
-- Thinks about: idle cash, FX risk, payment routing, multi-entity cash ops, CFO problems
-- Dry humor occasionally. Never performed enthusiasm.
+WHAT TO DO:
+1. Read the source material
+2. Find the angle [NAME] would actually have an opinion on — don't just summarize
+3. Make the connection to their professional world feel natural, not forced
+4. Draft 150-300 words
+5. Check for any of the banned patterns above and fix them
+6. Output the LinkedIn post, then a Twitter/X version under 280 characters
 
----
-
-## The Workflow
-
-### Step 1: Read the source
-Fetch and read the article/link. Extract:
-- The 1-2 most interesting factual claims
-- Any stat or data point worth citing
-- The tension or contradiction (what's surprising or counterintuitive)
-- The connection to treasury, payments, CFO life, or fintech operations
-
-### Step 2: Find Jeff's angle
-Don't summarize the article. Find the thing Jeff would actually have an opinion about.
-
-Good angles:
-- Something the article gets right that nobody talks about
-- Something the article misses
-- A connection to something in treasury/payments that the article doesn't make
-- A personal observation from building TreasuryPath or working at Gusto
-- The "this is what it actually looks like in practice" take
-
-### Step 3: Draft the post
-- 150-300 words for LinkedIn
-- Lead with the observation, not the article name
-- Make the Gusto/TreasuryPath connection feel natural, not forced
-- End with the real insight — what it means, not what to do about it
-
-### Step 4: Humanizer pass
-Before delivering, scan for:
-- Em dashes → replace with comma or restructure
-- Parallel structures ("not just X, but Y") → cut one side
-- AI vocabulary → cut entirely
-- Generic conclusions ("this is exciting / the future is bright") → replace with specific observation
-- Rule of three → break it up
-- Bold headers on every bullet → remove
-- Any sentence that sounds like it was written by a content team → rewrite
-
-### Step 5: Deliver
-Output:
-1. LinkedIn post (ready to copy-paste)
-2. Twitter/X version (< 280 chars, same voice, usually the sharpest line from the post)
-
----
-
-## LinkedIn Post Format
-
-No headers. No bullets. Just paragraphs — short ones.
-
-```
-[opening line — the observation or the thing that caught attention]
-
-[2-3 lines of context or the real situation as Jeff sees it]
-
-[the connection to treasury / CFO / payments world — specific]
-
-[the quiet insight at the end — what it actually means]
+WHAT NOT TO DO:
+- Don't summarize the article
+- Don't add a generic "what do you think?" closer
+- Don't use bullet points
+- Don't lead with "I read an interesting article today..."
+- Don't make it a listicle
 ```
 
 ---
 
-## Examples of Jeff's Voice
+## How to Use It
 
-**Good:**
+1. Fill in the `[BRACKETS]` at the top with your information
+2. Paste your source material (article URL, paste of text, or describe the idea)
+3. Run it
+4. If the output still sounds like AI wrote it, run the humanizer pass below
+
+---
+
+## Humanizer Pass
+
+If the output still sounds off, run this follow-up:
+
 ```
-talked with ruben from quiltt about open banking infrastructure. the behind-the-scenes version, not the conference version.
+Read the post you just wrote. Answer honestly:
+1. What makes it obvious this was written by AI?
+2. Which sentences sound like a content team wrote them, not a person?
+3. Which words are from the banned list that I missed?
 
-the actual problem: you're not integrating with "open banking." you're integrating with plaid, and mx, and four other providers, and still reconciling from pdf statements for institutions that don't support any of them.
-
-quiltt tries to normalize that. they're focused on b2b, which most aggregators treat as an afterthought.
-
-none of this moves money. that's still the hard part.
-```
-
-**Bad (do not write like this):**
-```
-🚀 Exciting news in the fintech space! Open banking is transforming how companies manage their finances. Key takeaways from my conversation with Quiltt's CEO:
-• Seamless API integration
-• Robust data normalization  
-• Pivotal shift in B2B payments
-
-The future of treasury management is here! #fintech #openbanking
+Now rewrite it. Make it sound like a real person sent it from their phone on a Tuesday morning.
 ```
 
 ---
 
-## TreasuryPath Context (for making the connection)
+## Voice Examples
 
-- Treasury management + payments platform for mid-market companies ($10M-$150M)
-- Replaces: the Deloitte TMS implementation + the treasury analyst hire ($300-600K/year total)
-- The moat: we can actually move money (Airwallex + sponsor bank + state MTLs). Dashboards can't.
-- TPUSD: never "yield/interest/APY/returns" — always "variable-rate rewards"
-- ICP: CFO who just got told she can't hire another analyst, but the work still needs doing
-- Current traction: 4 clients, $5,549 MRR, $2.9M monthly GTV, zero churn
-- Jeff's background: former Head of Fintech Partnerships at Gusto
+**Good — sounds like a person:**
+```
+the reason plaid keeps failing on commercial jpmorgan accounts isn't a bug.
+it's a product decision jpmorgan made in 2019 and never revisited.
+
+everyone building in fintech hits this wall eventually.
+some build around it. most just accept it as "the plaid limitation."
+
+the bank wins either way.
+```
+
+**Bad — sounds like AI:**
+```
+🚀 Exciting developments in the open banking space! Key insights from today's reading:
+• Seamless API connectivity is transforming fintech
+• Robust data normalization enables better decisions
+• The landscape is evolving rapidly
+
+What are your thoughts? Drop a comment below! #fintech #openbanking
+```
 
 ---
 
-## Posting Channels
+## Filling In the Blanks — Examples
 
-- **Jeff's personal LinkedIn:** `/in/forkanjeff` — thought leadership, operator perspective
-- **TreasuryPath company page:** separate flow, more product-focused
-- **Twitter/X:** short punchy version, same voice
+**For a CFO / finance leader:**
+```
+[NAME]'s background: Former VP Finance at [Company]. Spent 10 years building financial systems for high-growth companies. Knows what it looks like when finance teams try to do too much with too little.
+[COMPANY] does: [Software/service] for finance teams at [company size] companies.
+Their content angle: CFO life, cash management, financial operations, AI in finance.
+```
 
-Default: Jeff's personal LinkedIn unless specified otherwise.
+**For a founder:**
+```
+[NAME]'s background: Second-time founder. Previously [role] at [company]. Knows B2B sales and product from building [previous company].
+[COMPANY] does: [Product] for [customer type].
+Their content angle: Startup building, B2B GTM, founder lessons, [industry].
+```
+
+**For an operator / executive:**
+```
+[NAME]'s background: 15 years in [industry]. [Most recent senior role]. Has seen [specific thing] firsthand.
+[COMPANY] does: [What they do].
+Their content angle: [2-3 themes they care about].
+```
+
+---
+
+## Tips
+
+- **The best posts come from opinions, not summaries.** What do you actually think about the article? Start there.
+- **Near-miss > prediction.** "I've seen this fail three times" beats "this is the future of X."
+- **Specific beats general.** "$47K shortfall on a Thursday afternoon" beats "cash flow challenges."
+- **If you wouldn't say it out loud, don't write it.** Read the post aloud. Does it sound like you?
+
+---
+
+*Part of the [prompts](https://github.com/jforksy/prompts) collection.*
